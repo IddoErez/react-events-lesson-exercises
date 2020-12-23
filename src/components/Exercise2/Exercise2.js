@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import List from "./List"
+import Conversation from "./Conversation"
 
 class Exercise2 extends Component {
   constructor() {
@@ -34,14 +36,28 @@ class Exercise2 extends Component {
     }
   }
 
-  render() {
-    return (
-      <div >
-        {/* If displayConverastion is null - 
-    App should render List, otherwise it should display Conversation */}
-      </div>
-    );
-  }
+  displayConvo = name=> {
+     this.setState({
+      displayConversations: name
+     })
+    }
+  
+render() {
+  return (
+    <div >
+      {this.state.displayConversation ? <Conversation /> :
+       <List key={Math.random()} contacts={this.state.conversations.map(c => c.with)} displayConvo={this.displayConvo} />}
+    </div>
+  );
 }
+  // render() {
+  //   return (
+  //     <div >
+  //       {this.state.displayConversations ? <Conversation /> :
+  //        this.state.conversations.map(c=>{return(<List  key={Math.random()} contacts={c.with}/>)})}
+  //     </div>
+  //   );
+  // }
 
+}
 export default Exercise2;

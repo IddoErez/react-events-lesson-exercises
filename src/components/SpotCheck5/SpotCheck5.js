@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Task from "./Task"
 
 class SpotCheck5 extends Component {
 
@@ -19,12 +20,26 @@ class SpotCheck5 extends Component {
   }
 
   markComplete = text => {
+    let tasksCopy = [...this.state.tasks]
+    tasksCopy.find(t => t.text === text).complete = true
+    
+    // tasksCopy.find(t => t.text === text)
+    // tasksComplete.complete = true
+    this.setState({ 
+      tasks: tasksCopy
+    })
 
   }
 
   render() {
     return (
-      <div></div>
+      <div>
+        {this.state.tasks.map(t => {
+          return (
+            <Task key={Math.random()} task={t} markComplete={this.markComplete} />
+          )
+        })}
+      </div>
     )
   }
 }
